@@ -9,9 +9,9 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ## Scripts 
 
-- [app.js](https://github.com/RimpleDabas/belly-button-challenge/blob/main/StarterCode/static/js/app.js) is the script used for the creation of dashboard
+- [app.js](https://github.com/RimpleDabas/belly-button-challenge/blob/main/static/js/app.js) is the script used for the creation of dashboard
 
-- [index.html](https://github.com/RimpleDabas/belly-button-challenge/blob/main/StarterCode/index.html) is the respective html file for the visualization.
+- [index.html](https://github.com/RimpleDabas/belly-button-challenge/blob/main/index.html) is the respective html file for the visualization.
 
 
 ## Dashboard 
