@@ -22,4 +22,9 @@ The interactive dashboard for the app was can be loacted [here](https://rimpleda
 The final dashoard looks like the image below. Hover over the charts for values.Use drop down menu for changing the subject id
 
  ![image](Images/final_dashboard.png)
+ 
+
+The second dashboard with needle pointer gauge looks like the image below
+
+![image](Images/Option 2.png)
 
