@@ -12,7 +12,8 @@ The interactive dashboard for the app was can be loacted [here](https://rimpleda
 
 ## Scripts 
 
-- [app.js](https://github.com/RimpleDabas/belly-button-challenge/blob/main/static/js/app.js) is the script used for the creation of dashboard
+- [app.js](https://github.com/RimpleDabas/belly-button-challenge/blob/main/static/js/app.js) is the script used for the creation of dashboard.
+Gauge chart has been created by using two variations. Uncomment to use the type needed for the plotting purpose.
 
 - [index.html](https://github.com/RimpleDabas/belly-button-challenge/blob/main/index.html) is the respective html file for the visualization.
 
@@ -26,5 +27,5 @@ The final dashoard looks like the image below. Hover over the charts for values.
 
 The second dashboard with needle pointer gauge looks like the image below
 
-![image](Images/Option 2.png)
+![image](Images/dashboard2.png)
 
