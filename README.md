@@ -13,8 +13,10 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 - [index.html](https://github.com/RimpleDabas/belly-button-challenge/blob/main/StarterCode/index.html) is the respective html file for the visualization.
 
-- use drop down menu for changing the subject id
+
 ## Dashboard 
 
-The final dashoard looks like the image below. Hover over the charts for values. ![image](Images/final_dashboard.png)
+The final dashoard looks like the image below. Hover over the charts for values.Use drop down menu for changing the subject id
+
+ ![image](Images/final_dashboard.png)
 

@@ -6,8 +6,7 @@ d3.json(url).then(function(data) {
     console.log(data);
   });
 
-  // understand the data, it has three main arrays of length 153 
-  // 1.names with the person ids 2.metadata details about the person  3. samples has four values
+  // understand the data, it has three main arrays of length 153 1.names with the person ids 2.metadata details about the person  3. samples has four values
   // id,out_ids, sample_values and otu labels
 
 // console log sample data to see what we need for the plots
@@ -171,6 +170,7 @@ function init() {
 });
 // function to change the plots based on the selection
 }
+// option changed 
 function optionChanged(next_Sample) {
      sample_plot(next_Sample);
      sample_Metadata(next_Sample);
