@@ -51,11 +51,6 @@ function sample_plot(sample_id) {
 
     var bar_Layout = {
         title: {text : `<b>Top 10 OTU in Sample ${sample_id}</b>`,font: { size: 24 }},
-        width: 500,
-        height: 400,
-        margin: { t: 50, r: 30, l: 75, b: 25 },
-        paper_bgcolor: "lavender",
-        font: { color: "darkblue", family: "Arial" },
     };
     Plotly.newPlot("bar", trace_bar, bar_Layout);
 
@@ -84,49 +79,122 @@ function sample_plot(sample_id) {
     Plotly.newPlot("bubble", trace_bubble, bubble_layout);
 });
 }
-// build gauge chart
-function gauge_chart(washing_frequency) {
-  var data = [{
-      type: "indicator",
-      mode: "gauge+number+delta",
-      value:washing_frequency,
-      title: { text: "<b> Belly Button Washing Frequency</b> <br> Scrubs per week" , font: { size: 24 } },
-      delta: { reference: 5 , increasing: { color: "Purple" }},
-      gauge: {
-        axis: { range: [null, 9] , tickwidth: 1, tickcolor: "darkblue" },
-        bar: { color: "120106" },
-        steps: [
-          { range: [0, 1], color: 'D9C4C9'},
-          { range: [1, 2], color: 'DAB5BE'},
-          { range: [2, 3], color: 'DE99AA'},
-          { range: [3, 4], color: 'E55F80'},
-          { range: [4, 5], color: 'E25570'},
-          { range: [5, 6], color: 'E24A67'},
-          { range: [6, 7], color: 'E22E50'},
-          { range: [7, 8], color: '990F29'},
-          { range: [8, 9], color: '570918'}
-        ],
-        threshold: {
-          line: { color: "5D3542", width: 4 },
-          thickness: 0.75,
-          value: 5
-        }
-      }
-  }];
 
-  // Get data and layout
-  var gaugeLayout = { 
-      width: 500,
-      height: 400,
-      margin: { t: 25, r: 25, l: 25, b: 25 },
-      paper_bgcolor: "lavender",
-      font: { color: "darkblue", family: "Arial" }
-   }
+// // build gauge chart 
+
+//   ---------Type 1--------
+// function gaugePointer(washing_frequency) {
+//   var data = [{
+//       type: "indicator",
+//       mode: "gauge+number+delta",
+//       value:washing_frequency,
+//       title: { text: "<b> Belly Button Washing Frequency</b> <br> Scrubs per week" , font: { size: 24 } },
+//       delta: { reference: 5 , increasing: { color: "Purple" }},
+//       gauge: {
+//         axis: { range: [null, 9] , tickwidth: 1, tickcolor: "darkblue" },
+//         bar: { color: "120106" },
+//         steps: [
+//           { range: [0, 1], color: 'D9C4C9'},
+//           { range: [1, 2], color: 'DAB5BE'},
+//           { range: [2, 3], color: 'DE99AA'},
+//           { range: [3, 4], color: 'E55F80'},
+//           { range: [4, 5], color: 'E25570'},
+//           { range: [5, 6], color: 'E24A67'},
+//           { range: [6, 7], color: 'E22E50'},
+//           { range: [7, 8], color: '990F29'},
+//           { range: [8, 9], color: '570918'}
+//         ],
+//         threshold: {
+//           line: { color: "5D3542", width: 4 },
+//           thickness: 0.75,
+//           value: 5
+//         }
+//       }
+//   }];
+
+//   // Get data and layout
+//   var gaugeLayout = { 
+//       width: 500,
+//       height: 400,
+//       margin: { t: 25, r: 25, l: 25, b: 25 },
+//       paper_bgcolor: "lavender",
+//       font: { color: "darkblue", family: "Arial" }
+//    }
   
 
-  Plotly.newPlot('gauge', data, gaugeLayout);
-};
+//   Plotly.newPlot('gauge', data, gaugeLayout);
+// };
 
+
+// ------Type 2 with needle-----
+
+// Help taken from https://codepen.io/ascotto/pen/eGNaqe?editors=0011
+
+function gaugePointer(washing_frequency){
+	// try different values in place of 20 , 20 was chosen considering half circle for the needle pointer is 180 and range is from 0-9 , 
+  // for the needle to cover two points it takes 20 degrees.
+
+  var degrees = (180 - washing_frequency*20),
+  
+  radius = .45;
+  // converting degrees to radians
+  var radians = degrees * Math.PI / 180;
+// get x and y cordinates for the needle to create the path
+  var x = radius * Math.cos(radians);
+  var y = radius * Math.sin(radians);
+
+  var mainPath = 'M -.0 -0.035 L .0 0.035 L ',
+      pathX = String(x),
+      space = ' ',
+      pathY = String(y),
+      pathEnd = 'Z';
+
+  var path = mainPath.concat(pathX,space,pathY,pathEnd);
+
+  var data_washing_frequency = [{
+      type: 'scatter',
+      x: [0], y:[0],
+      marker: {size: 15, color:'#1f1717'},
+      showlegend: false,
+      name: 'Washing Frequency',
+      text: washing_frequency,
+      hoverinfo: 'text+name'},
+      { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
+      rotation: 90,
+      text: ['8-9', '7-8', '6-7', '5-6','4-5', '3-4', '2-3', '1-2', '0-1', ''],
+      textinfo: 'text',
+      textposition:'inside',	  
+              marker: {colors:['rgba(4, 87, 0, .5)', 'rgba(8, 107, 0, .5)', 
+                              'rgba(10, 117, 0, .5)', 'rgba(14, 127, 0, .5)', 
+                              'rgba(110, 154, 22, .5)', 'rgba(170, 202, 42, .5)', 
+                              'rgba(202, 209, 95, .5)', 'rgba(210, 206, 145, .5)', 
+                              'rgba(232, 226, 202, .5)', 'rgba(255, 255, 255, 0)']},
+      labels: ['8-9', '7-8', '6-7', '5-6','4-5', '3-4', '2-3', '1-2', '0-1', ''],
+      hoverinfo: 'label',
+      hole: .5,
+      type: 'pie',
+      showlegend: false
+  }]
+
+  var layout = {
+
+      shapes:[{
+          type: 'path',
+          path: path,
+          fillcolor: '#6b211c',
+          line: {
+              color: 'black'
+          }
+        
+          }],
+      title: {text : '<b>Belly Button Washing Frequency</b> <br> Scrubs per week',font: { size: 24 }},
+      xaxis: {zeroline:false, showticklabels:false,
+                  showgrid: false, range: [-1, 1]},
+      yaxis: {zeroline:false, showticklabels:false,
+                  showgrid: false, range: [-1, 1]}
+  };
+  Plotly.newPlot('gauge', data_washing_frequency, layout);
+};
 
 // get the demographic information based on the sample which is in metadata array
 
@@ -144,7 +212,7 @@ function sample_Metadata(sample_id) {
       Object.entries(sample_result).forEach(([key,value]) => { 
         console.log(key,value);
         d3.select("#sample-metadata").append("h5").text(`${key}: ${value}`);
-        gauge_chart(washing_frequency)
+        gaugePointer(washing_frequency)
     });
     
    });
